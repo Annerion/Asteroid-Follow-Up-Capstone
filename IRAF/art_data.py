@@ -13,7 +13,7 @@ def clear():
 def placeStar(A,s,x0,y0,cutoff=10):
 	for y in range(int(y0-cutoff*s), int(y0+cutoff*s)):
 		for x in range(int(x0-cutoff*s), int(x0+cutoff*s)):
-			if (0<=x<width)&(0<=y<height):
+			if (0<=x<width) and (0<=y<height):
 				image.data[y][x]+=A*math.exp(-1*((x-x0)**2+(y-y0)**2)/(2*s**2))
 def makeField(count=100):
 	for i in range(int(count)-1):

@@ -1,0 +1,19 @@
+# Mon 01:07:07 06-Nov-2017
+# begin	onestar.txt
+#	spatial		uniform
+#	xmin		1.
+#	xmax		512.
+#	ymin		1.
+#	ymax		512.
+#	luminosity	powlaw
+#	power		0.6
+#	minmag		-7.
+#	maxmag		0.
+#	nssample	100
+#	sorder		10
+#	sseed		1
+#	nlsample	100
+#	lorder		10
+#	lseed		1
+#	nstars		1
+	 363.169   218.175   -0.249
