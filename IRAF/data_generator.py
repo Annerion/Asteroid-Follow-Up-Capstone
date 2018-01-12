@@ -5,7 +5,7 @@ import random
 import os
 import numpy as np
 import subprocess
-expansion_factor=4
+expansion_factor=2
 aSize= 0.25 #angular size of a pixel 
 aVelocity=20.0/50#angular speed of the source
 pVelocity=aVelocity/aSize #pixels crossed per second
@@ -19,7 +19,7 @@ source= fits.open('mystars.fits')
 image= source[0]
 height= image.data.shape[0]*expansion_factor
 width= image.data.shape[1]*expansion_factor
-image.data= [[np.random.poisson(sky_counts_pixel) for x in range(width)] for y in range(height)]
+image.data= [[np.random.poisson(sky_counts_pixel)+0.0 for x in range(width)] for y in range(height)]
 def magToCounts(m,t):
 	return (40.45*10**((20-m)/2.5))/(14.14)*t
 def clear():
