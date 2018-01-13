@@ -5,7 +5,7 @@ import random
 import os
 import numpy as np
 import subprocess
-expansion_factor=2
+expansion_factor=4
 aSize= 0.25 #angular size of a pixel 
 aVelocity=20.0/50#angular speed of the source
 pVelocity=aVelocity/aSize #pixels crossed per second
@@ -19,7 +19,8 @@ source= fits.open('mystars.fits')
 image= source[0]
 height= image.data.shape[0]*expansion_factor
 width= image.data.shape[1]*expansion_factor
-image.data= [[np.random.poisson(sky_counts_pixel)+0.0 for x in range(width)] for y in range(height)]
+#image.data= [[np.random.poisson(sky_counts_pixel)+0.0 for x in range(width)] for y in range(height)]
+image.data= [[0.0 for x in range(width)] for y in range(height)]#for use when noise is added later (modular use)
 def magToCounts(m,t):
 	return (40.45*10**((20-m)/2.5))/(14.14)*t
 def clear():
@@ -79,13 +80,16 @@ def mkNoise():
 	p=subprocess.Popen("cl")
 	p.communicate("mknoise mystars_smeared.fits")
 	p.communicate("log")
-for i in xrange(2,3):
-	makeField()
-	smear()
+makeField()
+smear()
+save(00)
+#for i in xrange(2,3):
+#	makeField()
+#	smear()
 	#recondense()
 	#mkNoise()
-	for n in xrange(0,50):
-		makeSource(21)
-	save(i)
-	iraf.blkavg('mystars_smeared_'+str(i)+'.fits','mystars_smeared_'+str(i)+'.fits',expansion_factor,expansion_factor)
+#	for n in xrange(0,50):
+#		makeSource(21)
+#	save(i)
+#	iraf.blkavg('mystars_smeared_'+str(i)+'.fits','mystars_smeared_'+str(i)+'.fits',expansion_factor,expansion_factor)
 #iraf.mknoise('mystars_smeared.fits')

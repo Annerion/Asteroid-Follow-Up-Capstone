@@ -2,7 +2,7 @@ import math
 def count(master, test, error=1):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
 	count=0
 	for source in master:
-		if getMatch(source, test, error)
+		if getMatch(source, test, error):
 			count+=1
 	return count
 def getMatch(source, test, error): #helper method that determines if a source is near any of the sources in test to within error
@@ -14,9 +14,18 @@ def getMatch(source, test, error): #helper method that determines if a source is
 				mag_new=distance(source, test[i])
 				if mag_new<mag_old:
 					min=1
-	if not min==-1
+	if not min==-1:
 		test.remove(min)
 		return True
 	return False
-def distance(source, test)
+def distance(source, test):
 	return math.sqrt((source[0]-test[0])**2+(source[1]-test[1])**2)
+def getTestFromFile(file_name,x_index,y_index):
+	data=open(file_name,'r')
+	test=[]
+	for line in data:
+		temp=line.split()
+		if not temp[0]=='#':
+			test.append([float(temp[x_index]),float(temp[y_index])])
+	return test
+print getTestFromFile('test.cat',5,6)
