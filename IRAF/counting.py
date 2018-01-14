@@ -1,5 +1,5 @@
 import math
-def count(master, test, error=1):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
+def count(master, test, error=10):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
 	count=0
 	for source in master:
 		if getMatch(source, test, error):
@@ -13,9 +13,11 @@ def getMatch(source, test, error): #helper method that determines if a source is
 				mag_old=distance(source, test[min])
 				mag_new=distance(source, test[i])
 				if mag_new<mag_old:
-					min=1
+					min=i
+			else:
+				min=i
 	if not min==-1:
-		test.remove(min)
+		del test[min]
 		return True
 	return False
 def distance(source, test):
@@ -28,4 +30,13 @@ def getTestFromFile(file_name,x_index,y_index):
 		if not temp[0]=='#':
 			test.append([float(temp[x_index]),float(temp[y_index])])
 	return test
-print getTestFromFile('test.cat',5,6)
+def getMasterFromFile(file_name):
+	data=open(file_name,'r')
+	source=[]
+	for line in data:
+		temp= line.split()
+		source.append([float(temp[0]),float(temp[1])])
+	return source
+test= getTestFromFile('test.cat',5,6)
+master= getMasterFromFile('sourcelist.txt')
+print count(master, test)

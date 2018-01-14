@@ -43,7 +43,10 @@ def makeField():
 	for star in star_list:
 		placeStar((40.45*10**((20-star)/2.5))/(14.14*pVelocity), 1.5, width*random.random(), height*random.random()) #no longer reduces amplitude scaled for expansion factor, as blkavg takes average
 def makeSource(m=default_m):
+	x=width*random.random()
+	y=height*random.random()
 	placeStar((40.45*10**((20-m)/2.5))/(14.14)*time, 1.5, width*random.random(), height*random.random()) #adds the source to the image, does not deal with the expansion factor, given a magnitude m
+	return [x/expansion_factor,y/expansion_factor]
 def save(i):
 	if i==0:
 		try:
@@ -80,9 +83,25 @@ def mkNoise():
 	p=subprocess.Popen("cl")
 	p.communicate("mknoise mystars_smeared.fits")
 	p.communicate("log")
-makeField()
-smear()
-save(00)
+#makeField()
+#smear()
+#save(0)
+source=fits.open("mystars_smeared.fits")
+image=source[0]
+try:
+	os.remove('sourcelist.txt')
+except OSError:
+	pass
+source_list=open('sourcelist.txt','w')
+coordinates=[]
+for n in xrange(0,50):
+	coordinates.append(makeSource(21))
+for coordinate in coordinates:
+	temp_string= ('\t'.join(str(i) for i in coordinate) + '\n')
+	source_list.writelines(temp_string)
+source_list.close()
+save(21)
+iraf.blkavg('mystars_smeared_'+str(21)+'.fits','mystars_smeared_'+str(21)+'.fits',expansion_factor,expansion_factor)
 #for i in xrange(2,3):
 #	makeField()
 #	smear()
