@@ -9,7 +9,7 @@ expansion_factor=4
 aSize= 0.25 #angular size of a pixel 
 aVelocity=20.0/50#angular speed of the source
 pVelocity=aVelocity/aSize #pixels crossed per second
-time= 150 #observation duration
+time= 600 #observation duration
 angle= 0.523 #angle of movment in radians
 default_m=22 #default magniutde ofthe source
 sky_mag=20 #magnitude of the sky per arcsec^2
@@ -83,25 +83,28 @@ def mkNoise():
 	p=subprocess.Popen("cl")
 	p.communicate("mknoise mystars_smeared.fits")
 	p.communicate("log")
-#makeField()
-#smear()
-#save(0)
-source=fits.open("mystars_smeared.fits")
-image=source[0]
-try:
-	os.remove('sourcelist.txt')
-except OSError:
-	pass
-source_list=open('sourcelist.txt','w')
-coordinates=[]
-for n in xrange(0,50):
-	coordinates.append(makeSource(21))
-for coordinate in coordinates:
-	temp_string= ('\t'.join(str(i) for i in coordinate) + '\n')
-	source_list.writelines(temp_string)
-source_list.close()
-save(21)
-iraf.blkavg('mystars_smeared_'+str(21)+'.fits','mystars_smeared_'+str(21)+'.fits',expansion_factor,expansion_factor)
+step=1
+if step==0:
+	makeField()
+	smear()
+	save(0)
+if step==1:
+	source=fits.open("mystars_smeared.fits")
+	image=source[0]
+	try:
+		os.remove('sourcelist.txt')
+	except OSError:
+		pass
+	source_list=open('sourcelist.txt','w')
+	coordinates=[]
+	for n in xrange(0,50):
+		coordinates.append(makeSource(21))
+	for coordinate in coordinates:
+		temp_string= ('\t'.join(str(i) for i in coordinate) + '\n')
+		source_list.writelines(temp_string)
+	source_list.close()
+	save(21.2)
+	iraf.blkavg('mystars_smeared_'+str(21)+'.fits','mystars_smeared_'+str(21)+'.fits',expansion_factor,expansion_factor)
 #for i in xrange(2,3):
 #	makeField()
 #	smear()

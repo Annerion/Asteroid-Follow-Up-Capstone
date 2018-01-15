@@ -1,5 +1,5 @@
 import math
-def count(master, test, error=5):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
+def count(master, test, error=20):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
 	count=0
 	for source in master:
 		if getMatch(source, test, error):
