@@ -15,6 +15,7 @@ default_m=22 #default magniutde ofthe source
 sky_mag=20 #magnitude of the sky per arcsec^2
 sky_counts=(40.45*10**((20-sky_mag)/2.5))/(14.14)*time #counts of the sky per arcsec^2 over the duration of the exposure
 sky_counts_pixel= sky_counts*(aSize**2)#counts of the sky per pixel over the duration of the exposure
+print sky_counts_pixel
 source= fits.open('mystars.fits')
 image= source[0]
 height= image.data.shape[0]*expansion_factor
@@ -103,8 +104,9 @@ if step==1:
 		temp_string= ('\t'.join(str(i) for i in coordinate) + '\n')
 		source_list.writelines(temp_string)
 	source_list.close()
-	save(21.2)
-	iraf.blkavg('mystars_smeared_'+str(21)+'.fits','mystars_smeared_'+str(21)+'.fits',expansion_factor,expansion_factor)
+	savenum=21.2
+	save(savenum)
+	iraf.blkavg('mystars_smeared_'+str(savenum)+'.fits','mystars_smeared_'+str(savenum)+'.fits',expansion_factor,expansion_factor)
 #for i in xrange(2,3):
 #	makeField()
 #	smear()
