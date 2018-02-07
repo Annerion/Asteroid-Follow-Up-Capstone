@@ -7,7 +7,7 @@ import numpy as np
 import subprocess
 expansion_factor=4
 aSize= 0.25 #angular size of a pixel 
-aVelocity=20.0/50#angular speed of the source
+aVelocity=20.0/50#angular speed of the source ("/second)
 pVelocity=aVelocity/aSize #pixels crossed per second
 time= 600 #observation duration
 angle= 0.523 #angle of movment in radians
@@ -15,13 +15,15 @@ default_m=22 #default magniutde ofthe source
 sky_mag=20 #magnitude of the sky per arcsec^2
 sky_counts=(40.45*10**((20-sky_mag)/2.5))/(14.14)*time #counts of the sky per arcsec^2 over the duration of the exposure
 sky_counts_pixel= sky_counts*(aSize**2)#counts of the sky per pixel over the duration of the exposure
-print sky_counts_pixel
+#print sky_counts_pixel
 source= fits.open('mystars.fits')
 image= source[0]
 height= image.data.shape[0]*expansion_factor
 width= image.data.shape[1]*expansion_factor
+e_height= (image.data.shape[0]+pVelocity*time)*expansion_factor#extended width and height to deal with boundry issues
+e_width= (image.data.shape[1]+pVelocity*time)*expansion_factor
 #image.data= [[np.random.poisson(sky_counts_pixel)+0.0 for x in range(width)] for y in range(height)]
-image.data= [[0.0 for x in range(width)] for y in range(height)]#for use when noise is added later (modular use)
+image.data= [[0.0 for x in range(e_width)] for y in range(e_height)]#for use when noise is added later (modular use)
 def magToCounts(m,t):
 	return (40.45*10**((20-m)/2.5))/(14.14)*t
 def clear():
@@ -42,12 +44,12 @@ def makeField():
 		star_list.append(float(line))
 	stars.close()
 	for star in star_list:
-		placeStar((40.45*10**((20-star)/2.5))/(14.14*pVelocity), 1.5, width*random.random(), height*random.random()) #no longer reduces amplitude scaled for expansion factor, as blkavg takes average
+		placeStar((40.45*10**((20-star)/2.5))/(14.14*pVelocity), 1.5, e_width*random.random(), e_height*random.random()) #no longer reduces amplitude scaled for expansion factor, as blkavg takes average, takes edge correction height and width
 def makeSource(m=default_m):
 	x=width*random.random()
 	y=height*random.random()
-	placeStar((40.45*10**((20-m)/2.5))/(14.14)*time, 1.5, width*random.random(), height*random.random()) #adds the source to the image, does not deal with the expansion factor, given a magnitude m
-	return [x/expansion_factor,y/expansion_factor]
+	placeStar((40.45*10**((20-m)/2.5))/(14.14)*time, 1.5, x, y) #adds the source to the image, does not deal with the expansion factor, given a magnitude m
+	return [x/expansion_factor,y/expansion_factor] #takes normal height and width so all soruces appear in final image
 def save(i):
 	if i==0:
 		try:
@@ -69,7 +71,7 @@ def smear():
 	for y in range(0, height-1):
 		for x in range(0, width-1):
 			for s in range(1,int(steps)):
-				if (x+s<width) and (y+s<height):
+				if (x+s<e_width) and (y+s<e_height):#modified so that it checks for values beyond the boundaries
 					image.data[y][x]+=image.data[y+s*math.sin(angle)][x+s*math.cos(angle)]
 def recondense():
 	star_map= [[0.0] * int(width/expansion_factor) for i in range(int(height/expansion_factor))]
