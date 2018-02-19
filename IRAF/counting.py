@@ -1,5 +1,6 @@
 import math
-def count(master, test, error=20):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
+import sys
+def count(master, test, error=9):#master and test are each assumed to be 2D lists of nx2 and mx2 containing xy coordinates, error is the fogivness on matches in the same units as the x and y of the lists
 	count=0
 	for source in master:
 		if getMatch(source, test, error):
@@ -37,6 +38,6 @@ def getMasterFromFile(file_name):
 		temp= line.split()
 		source.append([float(temp[0]),float(temp[1])])
 	return source
-test= getTestFromFile('test.cat',5,6)
+test= getTestFromFile(sys.argv[1],5,6)
 master= getMasterFromFile('sourcelist.txt')
-print count(master, test)
+print "The number of sources (/50) detected is: "+str(count(master, test))+"\n"+"The total number of detections is: "+str(len(test))
