@@ -1,0 +1,27 @@
+#   1 NUMBER                 Running object number                                     
+#   2 FLUX_ISO               Isophotal flux                                             [count]
+#   3 FLUXERR_ISO            RMS error for isophotal flux                               [count]
+#   4 BACKGROUND             Background at centroid position                            [count]
+#   5 THRESHOLD              Detection threshold above background                       [count]
+#   6 X_IMAGE                Object position along x                                    [pixel]
+#   7 Y_IMAGE                Object position along y                                    [pixel]
+#   8 CXX_IMAGE              Cxx object ellipse parameter                               [pixel**(-2)]
+#   9 CYY_IMAGE              Cyy object ellipse parameter                               [pixel**(-2)]
+#  10 CXY_IMAGE              Cxy object ellipse parameter                               [pixel**(-2)]
+#  11 A_IMAGE                Profile RMS along major axis                               [pixel]
+#  12 B_IMAGE                Profile RMS along minor axis                               [pixel]
+#  13 THETA_IMAGE            Position angle (CCW/x)                                     [deg]
+#  14 THETA_WORLD            Position angle (CCW/world-x)                               [deg]
+#  15 THETA_SKY              Position angle (east of north) (native)                    [deg]
+#  16 THETA_J2000            Position angle (east of north) (J2000)                     [deg]
+#  17 THETA_B1950            Position angle (east of north) (B1950)                     [deg]
+         1     385.2918     57.67382     508.6771     33.64169    464.0127     29.5139   1.5570030e+00   4.0031133e+00  -4.8692985e-03     0.801     0.500   0.06   0.06  +0.00  +0.00  +0.00
+         2      408.687     53.31022     507.9014     33.64169    234.8051    453.8135   3.1251187e+00   3.1547749e+00  -4.0983739e+00     0.958     0.439  44.79  44.79  +0.00  +0.00  +0.00
+         3     389.3456     57.70193     507.0266     33.64169    340.8453    446.3241   1.0748098e+00   5.5815835e+00  -2.0903547e+00     1.088     0.415  12.44  12.44  +0.00  +0.00  +0.00
+         4     742.1437     78.27376     507.8774     33.64169    208.9649    438.7557   1.9763628e+00   2.6022260e+00  -3.8981681e+00     1.781     0.484  40.44  40.44  +0.00  +0.00  +0.00
+         5      815.845     84.80421      507.431     33.64169    310.6404    429.6344   6.8997914e-01   5.0374241e+00  -1.4154197e+00     1.316     0.441   9.02   9.02  +0.00  +0.00  +0.00
+         6     1895.269     126.8991     507.6108     33.64169    188.8953    427.6884   5.2010149e-01   2.4247794e+00  -2.0181403e+00     3.431     0.591  23.33  23.33  +0.00  +0.00  +0.00
+         7     1868.932     132.6323     507.2587     33.64169    322.6812    313.1552   5.9690970e-01   1.6264019e+00  -1.5478621e+00     2.343     0.700  28.19  28.19  +0.00  +0.00  +0.00
+         8     1367.707     110.2737     507.4407     33.64169    289.2448    293.8250   5.8470470e-01   1.6177337e+00  -1.6354330e+00     2.731     0.695  28.86  28.86  +0.00  +0.00  +0.00
+         9     1180.093     99.99091     507.6807     33.64169    194.5433    239.1320   7.4099922e-01   2.0565858e+00  -2.1089053e+00     2.532     0.615  29.02  29.02  +0.00  +0.00  +0.00
+        10     7862.129     137.3494     507.8642     33.64169    205.3958    111.9945   6.9657063e-01   1.0526927e+00   3.7655064e-01     1.275     0.939 -23.30 -23.30  +0.00  +0.00  +0.00

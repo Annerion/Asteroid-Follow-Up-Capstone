@@ -13,7 +13,7 @@ PARAMETERS_NAME  params.txt  # name of the file containing catalog contents
  
 DETECT_TYPE      CCD            # CCD (linear) or PHOTO (with gamma correction)
 DETECT_MINAREA   4              # minimum number of pixels above threshold
-DETECT_MAXAREA   75
+DETECT_MAXAREA   25
 DETECT_THRESH    1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
 ANALYSIS_THRESH  1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
  
@@ -56,17 +56,17 @@ STARNNW_NAME     default.nnw    # Neural-Network_Weight table filename
 BACK_SIZE        32             # Background mesh: <size> or <width>,<height>
 BACK_FILTERSIZE  9              # Background filter: <size> or <width>,<height>
 BACK_TYPE	 MANUAL
-BACK_VALUE	 35
+BACK_VALUE	 507
  
 BACKPHOTO_TYPE   GLOBAL         # can be GLOBAL or LOCAL
  
 #------------------------------ Check Image ----------------------------------
  
-CHECKIMAGE_TYPE  BACKGROUND,OBJECTS,FILTERED           # can be NONE, BACKGROUND, BACKGROUND_RMS,
+CHECKIMAGE_TYPE  OBJECTS, FILTERED, SEGMENTATION    # can be NONE, BACKGROUND, BACKGROUND_RMS,
                                 # MINIBACKGROUND, MINIBACK_RMS, -BACKGROUND,
                                 # FILTERED, OBJECTS, -OBJECTS, SEGMENTATION,
                                 # or APERTURES
-CHECKIMAGE_NAME  back.fits, obj.fits, filt.fits     # Filename for the check-image
+CHECKIMAGE_NAME  obj.fits, filt.fits seg.fits   # Filename for the check-image
  
 #--------------------- Memory (change with caution!) -------------------------
  

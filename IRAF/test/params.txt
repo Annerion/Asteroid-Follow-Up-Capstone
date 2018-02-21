@@ -1,0 +1,17 @@
+NUMBER                 Running object number                                     
+FLUX_ISO               Isophotal flux                                             [count]
+FLUXERR_ISO            RMS error for isophotal flux                               [count]
+BACKGROUND             Background at centroid position                            [count]
+THRESHOLD              Detection threshold above background                       [count]
+X_IMAGE                Object position along x                                    [pixel]
+Y_IMAGE                Object position along y                                    [pixel]
+CXX_IMAGE
+CYY_IMAGE
+CXY_IMAGE
+A_IMAGE
+B_IMAGE
+THETA_IMAGE
+THETA_WORLD
+THETA_SKY
+THETA_J2000
+THETA_B1950

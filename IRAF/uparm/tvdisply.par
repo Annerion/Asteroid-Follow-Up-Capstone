@@ -1,5 +1,5 @@
-image,f,a,"mystars_smeared.fits",,,"image to be displayed"
-frame,i,a,4,1,16,"frame to be written into"
+image,f,a,"mystars_smeared_22.1.fits",,,"image to be displayed"
+frame,i,a,1,1,16,"frame to be written into"
 bpmask,f,h,"BPM",,,"bad pixel mask"
 bpdisplay,s,h,"none",none|overlay|interpolate,,"bad pixel display (none|overlay|interpolate)"
 bpcolors,s,h,"red",,,"bad pixel colors"
